@@ -9,7 +9,7 @@ public class Scroll extends Artifact {
 
     public Scroll(String name, int value, int weight, String spellName) {
         super(name, value, weight);
-        this.spellName = spellName;
+        this.spellName = spellName == null ? "Unknown Spell" : spellName;
     }
 
     public String getSpellName() {
@@ -18,6 +18,6 @@ public class Scroll extends Artifact {
 
     @Override
     public void accept(ArtifactVisitor visitor) {
-        // TODO: call visitor.visit(this) for double dispatch.
+        visitor.visit(this);
     }
 }

@@ -9,7 +9,7 @@ public class Ring extends Artifact {
 
     public Ring(String name, int value, int weight, int magicBonus) {
         super(name, value, weight);
-        this.magicBonus = magicBonus;
+        this.magicBonus = Math.max(0, magicBonus);
     }
 
     public int getMagicBonus() {
@@ -18,6 +18,6 @@ public class Ring extends Artifact {
 
     @Override
     public void accept(ArtifactVisitor visitor) {
-        // TODO: call visitor.visit(this) for double dispatch.
+        visitor.visit(this);
     }
 }

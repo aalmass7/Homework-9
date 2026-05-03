@@ -9,7 +9,7 @@ public class Potion extends Artifact {
 
     public Potion(String name, int value, int weight, int healing) {
         super(name, value, weight);
-        this.healing = healing;
+        this.healing = Math.max(0, healing);
     }
 
     public int getHealing() {
@@ -18,6 +18,6 @@ public class Potion extends Artifact {
 
     @Override
     public void accept(ArtifactVisitor visitor) {
-        // TODO: call visitor.visit(this) for double dispatch.
+        visitor.visit(this);
     }
 }

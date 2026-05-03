@@ -9,7 +9,7 @@ public class Armor extends Artifact {
 
     public Armor(String name, int value, int weight, int defenseBonus) {
         super(name, value, weight);
-        this.defenseBonus = defenseBonus;
+        this.defenseBonus = Math.max(0, defenseBonus);
     }
 
     public int getDefenseBonus() {
@@ -18,6 +18,6 @@ public class Armor extends Artifact {
 
     @Override
     public void accept(ArtifactVisitor visitor) {
-        // TODO: call visitor.visit(this) for double dispatch.
+        visitor.visit(this);
     }
 }

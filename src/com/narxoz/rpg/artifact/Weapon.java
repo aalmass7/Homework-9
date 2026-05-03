@@ -9,7 +9,7 @@ public class Weapon extends Artifact {
 
     public Weapon(String name, int value, int weight, int attackBonus) {
         super(name, value, weight);
-        this.attackBonus = attackBonus;
+        this.attackBonus = Math.max(0, attackBonus);
     }
 
     public int getAttackBonus() {
@@ -18,6 +18,6 @@ public class Weapon extends Artifact {
 
     @Override
     public void accept(ArtifactVisitor visitor) {
-        // TODO: call visitor.visit(this) for double dispatch.
+        visitor.visit(this);
     }
 }
