@@ -30,7 +30,7 @@ public class Hero {
                 int defense,
                 int gold,
                 Inventory inventory) {
-        this.name = name;
+        this.name = name== null ? "Nameless Hero" : name;
         this.hp = hp;
         this.maxHp = hp;
         this.mana = mana;
@@ -155,8 +155,16 @@ public class Hero {
      * @return a HeroMemento snapshot, or null in the scaffold
      */
     public HeroMemento createMemento() {
-        // TODO: capture the full mutable state into a HeroMemento.
-        return null;
+        return new HeroMemento(
+                name,
+                hp,
+                mana,
+                gold,
+                maxHp,
+                attackPower,
+                defense,
+                inventory.getArtifacts()
+        );
     }
 
     /**
@@ -165,7 +173,22 @@ public class Hero {
      * @param memento the snapshot to restore from
      */
     public void restoreFromMemento(HeroMemento memento) {
-        // TODO: read the snapshot and restore the hero's mutable state.
+        if (memento == null) {
+            return;
+        }
+        if (!name.equals(memento.getName())) {
+            throw new IllegalArgumentException("Cannot restore " + name + " from another hero's memento.");
+        }
+        if (maxHp != memento.getMaxHp()
+                || attackPower != memento.getAttackPower()
+                || defense != memento.getDefense()) {
+            throw new IllegalArgumentException("Memento does not belong to this hero build.");
+        }
+
+        hp = memento.getHp();
+        mana = memento.getMana();
+        gold = memento.getGold();
+        inventory = new Inventory(memento.getInventorySnapshot());
     }
 
     @Override
@@ -177,6 +200,7 @@ public class Hero {
                 + ", gold=" + gold
                 + ", attackPower=" + attackPower
                 + ", defense=" + defense
+                + ", inventorySize=" + inventory.size()
                 + '}';
     }
 }
