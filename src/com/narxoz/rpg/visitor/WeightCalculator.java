@@ -2,8 +2,6 @@ package com.narxoz.rpg.visitor;
 
 import com.narxoz.rpg.artifact.*;
 
-import javax.lang.model.type.ArrayType;
-
 public class WeightCalculator implements ArtifactVisitor {
 
     private int totalWeight;
